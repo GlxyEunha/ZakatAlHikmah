@@ -47,7 +47,7 @@ class ZakatController extends Controller
             'panitia' => $request->panitia,
         ]);
 
-        return redirect()->route('zakat')->with('success', 'Zakat berhasil ditambahkan!');
+        return redirect()->route('rekap_zakat')->with('success', 'Zakat berhasil ditambahkan!');
     }
 
     public function index_pemohon()
@@ -71,7 +71,7 @@ class ZakatController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('pemohon')->with('success', 'Pemohon berhasil ditambahkan!');
+        return redirect()->route('rekap_pemohon')->with('success', 'Pemohon berhasil ditambahkan!');
     }
 
     public function index_pengeluaran()
@@ -103,6 +103,6 @@ class ZakatController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-        return redirect()->route('pengeluaran')->with('success', 'Pengeluaran berhasil ditambahkan!');
+        return redirect()->route('rekap_pengeluaran')->with('success', 'Pengeluaran berhasil ditambahkan!');
     }
 }

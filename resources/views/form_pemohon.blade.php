@@ -10,6 +10,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="{{ asset('js/scripts.js') }}"></script>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -125,62 +126,30 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Rekap Zakat</h1>
+                        <h1 class="mt-4">Form Pemohon</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Rekap Zakat</li>
+                            <li class="breadcrumb-item active">Form Pemohon</li>
                         </ol>
-                        <div class="d-flex justify-content-end">
-                            <form action="{{ route('form-zakat') }}">
-                                <button type="submit" class="btn btn-primary">Masukkan Data Zakat</button>  
-                            </form>
-                        </div>
-                        <br>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                Rekap Zakat
-                            <div class="card-body">
-                                @if(session('success'))
-                                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-                                        {{ session('success') }}
-                                    </div>
-                                @endif
-                                <table id="datatablesSimple" class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama</th>
-                                            <th>Jumlah Jiwa</th>
-                                            <th>Alamat</th>
-                                            <th>Zakat Fitrah Uang (Rp - IDR)</th>
-                                            <th>Zakat Fitrah Beras (Kg)</th>
-                                            <th>Zakat Maal</th>
-                                            <th>Infaq/Shodaqoh</th>
-                                            <th>Nama Penerima (Panitia)</th>
-                                            <th>Fidyah Uang (Rp - IDR)</th>
-                                            <th>Fidyah Beras (Kg)</th>
-                                            <th>Fidyah Lainnya</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($zakat as $item)
-                                            <tr>
-                                                <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->jml_jiwa }}</td>
-                                                <td>{{ $item->alamat }}</td>
-                                                <td>{{ $item->fitrah_uang}}</td>
-                                                <td>{{ $item->fitrah_beras }}</td>
-                                                <td>{{ $item->maal}}</td>
-                                                <td>{{ $item->infaq}}</td>
-                                                <td>{{ $item->panitia }}</td>
-                                                <td>{{ $item->fidyah_uang}}</td>
-                                                <td>{{ $item->fidyah_beras }}</td>
-                                                <td>{{ $item->fidyah_lainnya }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                        <form action="{{ route('pemohon') }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <label for="pemohon">Nama Pemohon</label>
+                                <input name="pemohon" type="text" class="form-control">
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label for="alamat">Alamat</label>
+                                <textarea name="alamat" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                  <input class="form-check-input" name="gridCheck" type="checkbox" id="gridCheck">
+                                  <label class="form-check-label" for="gridCheck">
+                                    Diterima
+                                  </label>
+                                </div>
+                              </div>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            </form>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -198,11 +167,5 @@
         <script src="/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="/js/datatables-simple-demo.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $(".alert").delay(3000).slideUp(300);
-            });
-        </script>
     </body>
 </html>

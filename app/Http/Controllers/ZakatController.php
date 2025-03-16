@@ -59,16 +59,16 @@ class ZakatController extends Controller
     public function store_pemohon(Request $request)
     {
         $request->validate([
-            'pemohon' => 'required',
-            'alamat' => 'required',
-            'status' => 'required',
+            'pemohon' => 'required|string|max:255',
+            'alamat' => 'required|string',
         ]);
 
-        // Create user
-        $pemohon = Pemohon::create([
+        $status = $request->has('gridCheck') ? 'Diterima' : 'Belum Diterima';
+
+        Pemohon::create([
             'pemohon' => $request->pemohon,
             'alamat' => $request->alamat,
-            'status' => $request->status,
+            'status' => $status,
         ]);
 
         return redirect()->route('rekap_pemohon')->with('success', 'Pemohon berhasil ditambahkan!');

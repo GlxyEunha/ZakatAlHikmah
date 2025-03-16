@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Rekap Zakat - SB Admin</title>
+        <title>Rekap Pemohon - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
@@ -125,20 +125,20 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Rekap Zakat</h1>
+                        <h1 class="mt-4">Rekap Pemohon</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Rekap Zakat</li>
+                            <li class="breadcrumb-item active">Rekap Pemohon</li>
                         </ol>
                         <div class="d-flex justify-content-end">
-                            <form action="{{ route('form-zakat') }}">
-                                <button type="submit" class="btn btn-primary">Masukkan Data Zakat</button>  
+                            <form action="{{ route('form-pemohon') }}">
+                                <button type="submit" class="btn btn-primary">Masukkan Data Pemohon</button>  
                             </form>
                         </div>
                         <br>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Rekap Zakat
+                                Rekap Pemohon
                             <div class="card-body">
                                 @if(session('success'))
                                     <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
@@ -149,32 +149,16 @@
                                     <thead>
                                         <tr>
                                             <th>Nama</th>
-                                            <th>Jumlah Jiwa</th>
                                             <th>Alamat</th>
-                                            <th>Zakat Fitrah Uang (Rp - IDR)</th>
-                                            <th>Zakat Fitrah Beras (Kg)</th>
-                                            <th>Zakat Maal</th>
-                                            <th>Infaq/Shodaqoh</th>
-                                            <th>Nama Penerima (Panitia)</th>
-                                            <th>Fidyah Uang (Rp - IDR)</th>
-                                            <th>Fidyah Beras (Kg)</th>
-                                            <th>Fidyah Lainnya</th>
+                                            <th>Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($zakat as $item)
+                                        @foreach ($pemohon as $item)
                                             <tr>
-                                                <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->jml_jiwa }}</td>
+                                                <td>{{ $item->pemohon }}</td>
                                                 <td>{{ $item->alamat }}</td>
-                                                <td>{{ $item->fitrah_uang}}</td>
-                                                <td>{{ $item->fitrah_beras }}</td>
-                                                <td>{{ $item->maal}}</td>
-                                                <td>{{ $item->infaq}}</td>
-                                                <td>{{ $item->panitia }}</td>
-                                                <td>{{ $item->fidyah_uang}}</td>
-                                                <td>{{ $item->fidyah_beras }}</td>
-                                                <td>{{ $item->fidyah_lainnya }}</td>
+                                                <td>{{ $item->status }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>

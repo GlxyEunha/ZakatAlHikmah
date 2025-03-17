@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Rekap Pemohon - SB Admin</title>
+        <title>Dashboard - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
@@ -16,7 +16,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="index.html">Zakat App</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -31,9 +31,6 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
@@ -66,59 +63,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Rekap Pengeluaran
                             </a>
-                            <div class="sb-sidenav-menu-heading">Interface</div>        
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>                 
-                            <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-                                </nav>
-                            </div>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Authentication
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="login.html">Login</a>
-                                            <a class="nav-link" href="register.html">Register</a>
-                                            <a class="nav-link" href="password.html">Forgot Password</a>
-                                        </nav>
-                                    </div>
-                                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Error
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
-                                    <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                                        <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="401.html">401 Page</a>
-                                            <a class="nav-link" href="404.html">404 Page</a>
-                                            <a class="nav-link" href="500.html">500 Page</a>
-                                        </nav>
-                                    </div>
-                                </nav>
-                            </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div> 
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
                         </div>
-                    </div>
-                    <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
                     </div>
                 </nav>
             </div>
@@ -148,9 +93,10 @@
                                 <table id="datatablesSimple" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>Alamat</th>
-                                            <th>Status</th>
+                                            <th>NAMA</th>
+                                            <th>ALAMAT</th>
+                                            <th>STATUS</th>
+                                            <th>AKSI</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -159,6 +105,14 @@
                                                 <td>{{ $item->pemohon }}</td>
                                                 <td>{{ $item->alamat }}</td>
                                                 <td>{{ $item->status }}</td>
+                                                <td>
+                                                    <a href="{{ route('edit_pemohon', $item->id) }}" class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $item->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -166,11 +120,37 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Modal Konfirmasi Hapus -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel">Konfirmasi Penghapusan</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah Anda yakin ingin menghapus data ini?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <form id="deleteForm" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Masjid Al Hikmah 2024</div>
+                            <div class="text-muted">
+                                Copyright &copy; Masjid Al Hikmah <span id="year"></span>
+                            </div>
                         </div>
                     </div>
                 </footer>
@@ -186,6 +166,16 @@
         <script>
             $(document).ready(function () {
                 $(".alert").delay(3000).slideUp(300);
+            });
+
+            document.getElementById("year").textContent = new Date().getFullYear();
+
+            $(document).ready(function () {
+                $('.delete-btn').on('click', function () {
+                    var id = $(this).data('id');
+                    var actionUrl = "{{ route('delete_pemohon', ':id') }}".replace(':id', id);
+                    $('#deleteForm').attr('action', actionUrl);
+                });
             });
         </script>
     </body>

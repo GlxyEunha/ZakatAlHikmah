@@ -70,93 +70,63 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Form Zakat</h1>
+                        <h1 class="mt-4">Form Catatan Pengeluaran</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Form Zakat</li>
+                            <li class="breadcrumb-item active">Form Catatan Pengeluaran</li>
                         </ol>
-                        <form action="{{ route('zakat') }}" method="post">
+                        <form action="{{ route('pengeluaran') }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="nama">Nama</label>
+                                <label for="tanggal">TANGGAL PENGELUARAN</label>
                                 <br>
-                                <small class="form-text text-muted">Tulis nama keluarganya saja (contoh: KLG. Bp/Ibu. Nazar)</small>
+                                <small class="form-text text-muted">Catat tanggal pengeluaran ketika Anda mengakses halaman ini</small>
+                                <input name="tanggal" type="date" class="form-control">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="nama">NAMA PELAPOR PENGELUARAN (YANG MENGISI FORM INI)</label>
                                 <br>
-                                <small class="form-text text-muted">Jika zakat untuk dirinya sendiri maka tulis nama lengkapnya (contoh: Ali Hidayat)</small>
+                                <small class="form-text text-muted">Tulis nama Anda yang mengisikan pengeluaran di formulir ini</small>
                                 <input name="nama" type="text" class="form-control">
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="jml_jiwa">Jumlah Jiwa</label>
+                                <label for="uraian">URAIAN PENGELUARAN</label>
                                 <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="jml_jiwa" type="text" class="form-control">
+                                <small class="form-text text-muted">Tulis uraian pengeluaran (berita acara), jangan menuliskan uang karena ada di pertanyaan berikutnya</small>
+                                <input name="uraian" type="text" class="form-control">
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="alamat">Alamat</label>
+                                <label for="biaya_uang">BIAYA YANG DIKELUARKAN (KHUSUS UANG)</label>
                                 <br>
-                                <small class="form-text text-muted">Tulis alamat tempat tinggal yang disingkat (contoh: Candi Mutiara Raya III Nomor 1 maka ditulis -- CMR III/1)</small>
-                                <textarea name="alamat" class="form-control"></textarea>
+                                <small class="form-text text-muted">Tulis biaya yang dikeluarkan (langsung angka saja)</small>
+                                <input name="biaya_uang" type="text" class="form-control input-rupiah">
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="fitrah_uang">Zakat Fitrah Uang</label>
+                                <label for="biaya_beras">JUMLAH YANG DIKELUARKAN (KHUSUS BERAS)</label>
                                 <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="fitrah_uang" type="text" class="form-control input-rupiah">
+                                <small class="form-text text-muted">Tulis jumlah yang dikeluarkan (langsung angka saja)</small>
+                                <input name="biaya_beras" type="text" class="form-control input-beras">
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="fitrah_beras">Zakat Fitrah Beras</label>
+                                <label for="biaya_lainnya">BIAYA YANG DIKELUARKAN (KHUSUS SELAIN UANG & BERAS)</label>
                                 <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="fitrah_beras" type="text" class="form-control input-beras">
+                                <small class="form-text text-muted">Tulis biaya yang dikeluarkan (langsung angka saja)</small>
+                                <input name="biaya_lainnya" type="text" class="form-control input-rupiah">
                             </div>
                             <br>
                             <div class="form-group">
-                                <label for="maal">Zakat Maal</label>
+                                <label for="keterangan">KETERANGAN</label>
                                 <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="maal" type="text" class="form-control input-rupiah">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="infaq">Infaq/Shodaqoh</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="infaq" type="text" class="form-control input-rupiah">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="fidyah_uang">Fidyah Uang</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="fidyah_uang" type="text" class="form-control input-rupiah">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="fidyah_beras">Fidyah Beras</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="fidyah_beras" type="text" class="form-control input-beras">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="fidyah_lainnya">Fidyah Lainnya</label>
-                                <br>
-                                <small class="form-text text-muted">Apabila tidak ada isian maka diberi angka 0 (Nol)</small>
-                                <input name="fidyah_lainnya" type="text" class="form-control">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="panitia">Nama Penerima/Panitia</label>
-                                <br>
-                                <small class="form-text text-muted">Nama penerima (panitia) yang menerima zakat fitrah, maal, infaq/shodaqoh (contoh: Rizqi AP-BARRA)</small>
-                                <input name="panitia" type="text" class="form-control">
+                                <small class="form-text text-muted">Tambahkan keterangan di sini (seperti siapa yang mengutus untuk melakukan pengeluaran, dan lain sebagainya yang relevan)</small>
+                                <input name="keterangan" type="text" class="form-control">
                             </div>
                             <br>
                             <button type="submit" class="btn btn-primary">Tambah</button>
-                            </form>
+                        </form>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -234,7 +204,6 @@
                     });
                 });
             });
-
         </script>
     </body>
 </html>

@@ -70,20 +70,20 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Rekap Zakat</h1>
+                        <h1 class="mt-4">Rekap Catatan Pengeluaran</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Rekap Zakat</li>
+                            <li class="breadcrumb-item active">Rekap Catatan Pengeluaran</li>
                         </ol>
                         <div class="d-flex justify-content-end">
-                            <form action="{{ route('form-zakat') }}">
-                                <button type="submit" class="btn btn-primary">Masukkan Data Zakat</button>  
+                            <form action="{{ route('form-pengeluaran') }}">
+                                <button type="submit" class="btn btn-primary">Masukkan Data Pengeluaran</button>  
                             </form>
                         </div>
                         <br>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                Rekap Zakat
+                                Rekap Catatan Pengeluaran
                             <div class="card-body">
                                 @if(session('success'))
                                     <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
@@ -93,36 +93,28 @@
                                 <table id="datatablesSimple" class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>NAMA</th>
-                                            <th>JUMLAH JIWA</th>
-                                            <th>ALAMAT</th>
-                                            <th>ZAKAT FITRAH UANG (Rp - IDR)</th>
-                                            <th>ZAKAT FITRAH BERAS (KG)</th>
-                                            <th>ZAKAT MAAL</th>
-                                            <th>INFAQ/SHODAQOH</th>
-                                            <th>NAMA PENERIMA (PANITIA)</th>
-                                            <th>FIDYAH UANG (Rp - IDR)</th>
-                                            <th>FIDYAH BERAS (Kg)</th>
-                                            <th>FIDYAH LAINNYA</th>
+                                            <th>TANGGAL PENGELUARAN</th>
+                                            <th>NAMA PELAPOR PENGELUARAN (YANG MENGISI FORM)</th>
+                                            <th>URAIAN PENGELUARAN</th>
+                                            <th>BIAYA YANG DIKELUARKAN (KHUSUS UANG)</th>
+                                            <th>BIAYA YANG DIKELUARKAN (KHUSUS BERAS)</th>
+                                            <th>BIAYA YANG DIKELUARKAN (KHUSUS SELAIN UANG & BERAS)</th>
+                                            <th>KETERANGAN</th>
                                             <th>AKSI</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($zakat as $item)
+                                        @foreach ($pengeluaran as $item)
                                             <tr>
+                                                <td>{{ $item->tanggal }}</td>
                                                 <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->jml_jiwa }}</td>
-                                                <td>{{ $item->alamat }}</td>
-                                                <td>Rp {{ number_format($item->fitrah_uang, 0, ',', '.') }}</td>
-                                                <td>{{ $item->fitrah_beras }} KG</td>
-                                                <td>Rp {{ number_format($item->maal, 0, ',', '.') }}</td>
-                                                <td>Rp {{ number_format($item->infaq, 0, ',', '.') }}</td>
-                                                <td>{{ $item->panitia }}</td>
-                                                <td>Rp {{ number_format($item->fidyah_uang, 0, ',', '.') }}</td>
-                                                <td>{{ $item->fidyah_beras }} KG</td>
-                                                <td>{{ $item->fidyah_lainnya }}</td>
+                                                <td>{{ $item->uraian }}</td>
+                                                <td>Rp {{ number_format($item->biaya_uang, 0, ',', '.') }}</td>
+                                                <td>{{ number_format($item->biaya_beras, 0, ',', '.') }} KG</td>
+                                                <td>Rp {{ number_format($item->biaya_lainnya, 0, ',', '.') }}</td>
+                                                <td>{{ $item->keterangan }}</td>
                                                 <td>
-                                                    <a href="{{ route('edit_zakat', $item->id) }}" class="btn btn-warning btn-sm">
+                                                    <a href="{{ route('edit_pengeluaran', $item->id) }}" class="btn btn-warning btn-sm">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <button class="btn btn-danger btn-sm delete-btn" data-id="{{ $item->id }}" data-bs-toggle="modal" data-bs-target="#deleteModal">
@@ -136,10 +128,9 @@
                             </div>
                         </div>
                     </div>
-                </main>
 
-                <!-- Modal Konfirmasi Hapus -->
-                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                     <!-- Modal Konfirmasi Hapus -->
+                     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -160,6 +151,7 @@
                             </div>
                         </div>
                     </div>
+                </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
@@ -188,7 +180,7 @@
             $(document).ready(function () {
                 $('.delete-btn').on('click', function () {
                     var id = $(this).data('id');
-                    var actionUrl = "{{ route('delete_zakat', ':id') }}".replace(':id', id);
+                    var actionUrl = "{{ route('delete_pengeluaran', ':id') }}".replace(':id', id);
                     $('#deleteForm').attr('action', actionUrl);
                 });
             });

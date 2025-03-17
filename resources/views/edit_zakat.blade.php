@@ -42,121 +42,73 @@
             </ul>
         </nav>
         <div id="layoutSidenav">
-            <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-                    <div class="sb-sidenav-menu">
-                        <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="{{ route('dashboard') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboard
-                            </a>
-                            <a class="nav-link" href="{{ route('rekap_zakat') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Rekap Zakat
-                            </a>
-                            <a class="nav-link" href="{{ route('rekap_pemohon') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Rekap Pemohon
-                            </a>
-                            <a class="nav-link" href="{{ route('rekap_pengeluaran') }}">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Rekap Pengeluaran
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Form Zakat</h1>
+                        <h1 class="mt-4">Edit Zakat</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Form Zakat</li>
+                            <li class="breadcrumb-item active">Edit Zakat</li>
                         </ol>
-                        <form action="{{ route('zakat') }}" method="post">
+                        <form action="{{ route('update_zakat', $zakat->id) }}" method="post">
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis nama keluarganya saja (contoh: KLG. Bp/Ibu. Nazar)</small>
-                                <br>
-                                <small class="form-text text-muted">Jika zakat untuk dirinya sendiri maka tulis nama lengkapnya (contoh: Ali Hidayat)</small>
-                                <input name="nama" type="text" class="form-control">
+                                <input name="nama" type="text" class="form-control" value="{{ $zakat->nama }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="jml_jiwa">Jumlah Jiwa</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="jml_jiwa" type="text" class="form-control">
+                                <input name="jml_jiwa" type="text" class="form-control" value="{{ $zakat->jml_jiwa }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis alamat tempat tinggal yang disingkat (contoh: Candi Mutiara Raya III Nomor 1 maka ditulis -- CMR III/1)</small>
-                                <textarea name="alamat" class="form-control"></textarea>
+                                <textarea name="alamat" class="form-control">{{ $zakat->alamat }}</textarea>
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="fitrah_uang">Zakat Fitrah Uang</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="fitrah_uang" type="text" class="form-control input-rupiah">
+                                <input name="fitrah_uang" type="text" class="form-control input-rupiah" value="{{ $zakat->fitrah_uang }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="fitrah_beras">Zakat Fitrah Beras</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="fitrah_beras" type="text" class="form-control input-beras">
+                                <input name="fitrah_beras" type="text" class="form-control input-beras" value="{{ $zakat->fitrah_beras }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="maal">Zakat Maal</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="maal" type="text" class="form-control input-rupiah">
+                                <input name="maal" type="text" class="form-control input-rupiah" value="{{ $zakat->maal }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="infaq">Infaq/Shodaqoh</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="infaq" type="text" class="form-control input-rupiah">
+                                <input name="infaq" type="text" class="form-control input-rupiah" value="{{ $zakat->infaq }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="fidyah_uang">Fidyah Uang</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="fidyah_uang" type="text" class="form-control input-rupiah">
+                                <input name="fidyah_uang" type="text" class="form-control input-rupiah" value="{{ $zakat->fidyah_uang }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="fidyah_beras">Fidyah Beras</label>
-                                <br>
-                                <small class="form-text text-muted">Tulis angka saja</small>
-                                <input name="fidyah_beras" type="text" class="form-control input-beras">
+                                <input name="fidyah_beras" type="text" class="form-control input-beras" value="{{ $zakat->fidyah_beras }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="fidyah_lainnya">Fidyah Lainnya</label>
-                                <br>
-                                <small class="form-text text-muted">Apabila tidak ada isian maka diberi angka 0 (Nol)</small>
-                                <input name="fidyah_lainnya" type="text" class="form-control">
+                                <input name="fidyah_lainnya" type="text" class="form-control" value="{{ $zakat->fidyah_lainnya }}">
                             </div>
                             <br>
                             <div class="form-group">
                                 <label for="panitia">Nama Penerima/Panitia</label>
-                                <br>
-                                <small class="form-text text-muted">Nama penerima (panitia) yang menerima zakat fitrah, maal, infaq/shodaqoh (contoh: Rizqi AP-BARRA)</small>
-                                <input name="panitia" type="text" class="form-control">
+                                <input name="panitia" type="text" class="form-control" value="{{ $zakat->panitia }}">
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                            </form>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
@@ -234,7 +186,6 @@
                     });
                 });
             });
-
         </script>
     </body>
 </html>

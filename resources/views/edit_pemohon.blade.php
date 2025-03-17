@@ -67,63 +67,39 @@
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">Form Pemohon</h1>
-                        <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Form Pemohon</li>
-                        </ol>
-                        <form action="{{ route('pemohon') }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <label for="pemohon">NAMA LEMBAGA/PEMOHON</label>
-                                <input name="pemohon" type="text" class="form-control">
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <label for="alamat">ALAMAT</label>
-                                <textarea name="alamat" class="form-control"></textarea>
-                            </div>
-                            <br>
-                            <div class="form-group">
-                                <div class="form-check">
-                                  <input class="form-check-input" name="gridCheck" type="checkbox" id="gridCheck">
-                                  <label class="form-check-label" for="gridCheck">
-                                    Diterima
-                                  </label>
-                                </div>
-                              </div>
-                              <br>
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                            </form>
-                    </div>
-                </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">
-                                Copyright &copy; Masjid Al Hikmah <span id="year"></span>
-                            </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Edit Pemohon</h1>
+                    <br>
+                    <form action="{{ route('update_pemohon', $pemohon->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <label for="pemohon">NAMA LEMBAGA/PEMOHON</label>
+                            <input name="pemohon" type="text" class="form-control" value="{{ $pemohon->pemohon }}">
                         </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="alamat">ALAMAT</label>
+                            <textarea name="alamat" class="form-control">{{ $pemohon->alamat }}</textarea>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Masjid Al Hikmah <span id="year"></span></div>
                     </div>
-                </footer>
-            </div>
+                </div>
+            </footer>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="/assets/demo/chart-area-demo.js"></script>
-        <script src="/assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-        <script src="/js/datatables-simple-demo.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $(".alert").delay(3000).slideUp(300);
-            });
-
-            document.getElementById("year").textContent = new Date().getFullYear();
-        </script>
-    </body>
+    </div>
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
 </html>
-

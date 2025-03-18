@@ -12,6 +12,28 @@
         <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
         <script src="{{ asset('js/scripts.js') }}"></script>
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <style>
+            .card {
+                background-color: white !important;
+                color: black !important;
+                border: 1px solid #ddd !important;
+                box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1) !important;
+                border-radius: 10px !important;
+            }
+            .card-body {
+                text-transform: uppercase;
+            }
+            .card-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top: 1px solid #ddd !important;
+                background: white !important;
+            }
+            .card-footer i {
+                color: black !important;
+            }
+        </style>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -81,81 +103,73 @@
                         </div>
                         <br>
 
-                        <!-- Baris Pertama -->
                         <div class="row">
                             <div class="col-xl-4 col-md-6">
-                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #007bff;">
-                                    <div class="card-body fw-bold text-uppercase">Total Uang Keseluruhan</div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <h4 class="fw-bold">Rp {{ number_format($total_uang, 0, ',', '.') }}</h4>
+                                <div class="card mb-4 shadow-sm border-0">
+                                    <div class="card-body">Total Uang Keseluruhan</div>
+                                    <div class="card-footer">
+                                        <h4>Rp {{ number_format($total_uang, 0, ',', '.') }}</h4>
                                         <i class="fas fa-wallet fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-md-6">
-                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #ffc107;">
-                                    <div class="card-body fw-bold text-uppercase">Total Beras Keseluruhan</div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <h4 class="fw-bold">{{ $total_beras }} kg</h4>
+                                <div class="card mb-4 shadow-sm border-0">
+                                    <div class="card-body">Total Beras Keseluruhan</div>
+                                    <div class="card-footer">
+                                        <h4>{{ $total_beras }} kg</h4>
                                         <i class="fas fa-weight-hanging fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-md-6">
-                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #28a745;">
-                                    <div class="card-body fw-bold text-uppercase">Total Pemohon</div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <h4 class="fw-bold">{{ $total_pemohon }}</h4>
+                                <div class="card mb-4 shadow-sm border-0">
+                                    <div class="card-body">Total Pemohon</div>
+                                    <div class="card-footer">
+                                        <h4>{{ $total_pemohon }}</h4>
                                         <i class="fas fa-users fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Baris Kedua -->
-                        <div class="row">
                             <div class="col-xl-6 col-md-6">
-                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #dc3545;">
-                                    <div class="card-body fw-bold text-uppercase">Total Pengeluaran Uang</div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <h4 class="fw-bold">Rp {{ number_format($total_pengeluaran_uang, 0, ',', '.') }}</h4>
+                                <div class="card mb-4 shadow-sm border-0">
+                                    <div class="card-body">Total Pengeluaran Uang</div>
+                                    <div class="card-footer">
+                                        <h4>Rp {{ number_format($total_pengeluaran_uang, 0, ',', '.') }}</h4>
                                         <i class="fas fa-money-bill-wave fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-md-6">
-                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #dc3545;">
-                                    <div class="card-body fw-bold text-uppercase">Total Pengeluaran Beras</div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <h4 class="fw-bold">{{ $total_pengeluaran_beras }} kg</h4>
+                                <div class="card mb-4 shadow-sm border-0">
+                                    <div class="card-body">Total Pengeluaran Beras</div>
+                                    <div class="card-footer">
+                                        <h4>{{ $total_pengeluaran_beras }} kg</h4>
                                         <i class="fas fa-box-open fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- Baris Ketiga -->
-                        <div class="row">
                             <div class="col-xl-6 col-md-6">
-                                <div class="card text-white mb-4 shadow-lg p-4 border border-light" style="background-color: #17a2b8;">
-                                    <div class="card-body fw-bold text-uppercase">Total Uang Bersih</div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <h3 class="fw-bold">Rp {{ number_format($total_uang_bersih, 0, ',', '.') }}</h3>
+                                <div class="card mb-4 shadow-sm border-0">
+                                    <div class="card-body">Total Uang Bersih</div>
+                                    <div class="card-footer">
+                                        <h4>Rp {{ number_format($total_uang_bersih, 0, ',', '.') }}</h4>
                                         <i class="fas fa-wallet fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-md-6">
-                                <div class="card text-white mb-4 shadow-lg p-4 border border-light" style="background-color: #17a2b8;">
-                                    <div class="card-body fw-bold text-uppercase">Total Beras Bersih</div>
-                                    <div class="card-footer d-flex justify-content-between align-items-center">
-                                        <h3 class="fw-bold">{{ $total_beras_bersih }} kg</h3>
+                                <div class="card mb-4 shadow-sm border-0">
+                                    <div class="card-body">Total Beras Bersih</div>
+                                    <div class="card-footer">
+                                        <h4>{{ $total_beras_bersih }} kg</h4>
                                         <i class="fas fa-weight-hanging fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

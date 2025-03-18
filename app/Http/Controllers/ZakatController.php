@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Zakat;
 use App\Models\Pemohon;
 use App\Models\Pengeluaran;
+use App\Exports\ZakatExport;
 use Illuminate\Http\Request;
 use App\Exports\PemohonExport;
 use App\Exports\PengeluaranExport;
@@ -290,6 +291,11 @@ class ZakatController extends Controller
     public function export_pengeluaran()
     {
         return Excel::download(new PengeluaranExport, 'catatan_pengeluaran.xlsx');
+    }
+
+    public function export_zakat()
+    {
+        return Excel::download(new ZakatExport, 'Zakat.xlsx');
     }
 
 }

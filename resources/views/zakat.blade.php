@@ -75,11 +75,92 @@
                             <li class="breadcrumb-item active">Rekap Zakat</li>
                         </ol>
                         <div class="d-flex justify-content-end">
+                            <form action="{{ route('export.zakat') }}" class="me-2">
+                                <button type="submit" class="btn btn-success">Export Excel</button>  
+                            </form>
                             <form action="{{ route('form-zakat') }}">
                                 <button type="submit" class="btn btn-primary">Masukkan Data Zakat</button>  
                             </form>
                         </div>
                         <br>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Total Pemasukan Zakat
+                            <div class="card-body">
+                                <table id="datatablesSimple" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>TANGGAL</th>
+                                            <th>JUMLAH JIWA</th>
+                                            <th>ZAKAT FITRAH UANG (Rp - IDR)</th>
+                                            <th>ZAKAT FITRAH BERAS (KG)</th>
+                                            <th>ZAKAT MAAL</th>
+                                            <th>INFAQ/SHODAQOH</th>
+                                            <th>FIDYAH UANG (Rp - IDR)</th>
+                                            <th>FIDYAH BERAS (Kg)</th>
+                                            <th>FIDYAH LAINNYA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $groupedZakat = $zakat->groupBy(function($item) {
+                                                return \Carbon\Carbon::parse($item->created_at)->format('Y-m-d');
+                                            });
+
+                                            // Hitung total keseluruhan uang
+                                            $totalFitrahUang = $zakat->sum('fitrah_uang');
+                                            $totalMaal = $zakat->sum('maal');
+                                            $totalInfaq = $zakat->sum('infaq');
+                                            $totalFidyahUang = $zakat->sum('fidyah_uang');
+                                            $totalGabunganUang = $totalFitrahUang + $totalMaal + $totalInfaq + $totalFidyahUang;
+
+                                            // Hitung total keseluruhan uang
+                                            $totalFitrahBeras = $zakat->sum('fitrah_beras');
+                                            $totalFidyahBeras = $zakat->sum('fidyah_beras');
+                                            $totalGabunganBeras = $totalFitrahBeras + $totalFidyahBeras;
+                                        @endphp
+                                
+                                        @foreach ($groupedZakat as $tanggal => $dataPerTanggal)
+                                            <tr>
+                                                <td>{{ \Carbon\Carbon::parse($tanggal)->format('d-m-Y') }}</td>
+                                                <td>{{ number_format($dataPerTanggal->sum('jml_jiwa'), 0, ',', '.') }}</td>
+                                                <td>Rp {{ number_format($dataPerTanggal->sum('fitrah_uang'), 0, ',', '.') }}</td>
+                                                <td>{{ number_format($dataPerTanggal->sum('fitrah_beras'), 0, ',', '.') }} KG</td>
+                                                <td>Rp {{ number_format($dataPerTanggal->sum('maal'), 0, ',', '.') }}</td>
+                                                <td>Rp {{ number_format($dataPerTanggal->sum('infaq'), 0, ',', '.') }}</td>
+                                                <td>Rp {{ number_format($dataPerTanggal->sum('fidyah_uang'), 0, ',', '.') }}</td>
+                                                <td>{{ number_format($dataPerTanggal->sum('fidyah_beras'), 0, ',', '.') }} KG</td>
+                                                <td>{{ number_format($dataPerTanggal->sum('fidyah_lainnya'), 0, ',', '.') }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th></th>
+                                            <th colspan="2" class="text-center">Total Uang Gabungan</th>
+                                            <th colspan="2" class="text-center">Rp {{ number_format($totalGabunganUang, 0, ',', '.') }}</th>
+                                            <th colspan="2" class="text-center">Total Beras Gabungan</th>
+                                            <th colspan="2" class="text-center">{{ number_format($totalGabunganBeras, 0, ',', '.') }} KG</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tfoot>
+                                        <tr>
+                                            <th class="text-center">Total</th>
+                                            <th>{{ number_format(collect($zakat)->sum('jml_jiwa'), 0, ',', '.') }} Jiwa</th>
+                                            <th>Rp {{ number_format(collect($zakat)->sum('fitrah_uang'), 0, ',', '.') }}</th>
+                                            <th>{{ number_format(collect($zakat)->sum('fitrah_beras'), 0, ',', '.') }} KG</th>
+                                            <th>Rp {{ number_format(collect($zakat)->sum('maal'), 0, ',', '.') }}</th>
+                                            <th>Rp {{ number_format(collect($zakat)->sum('infaq'), 0, ',', '.') }}</th>
+                                            <th>Rp {{ number_format(collect($zakat)->sum('fidyah_uang'), 0, ',', '.') }}</th>
+                                            <th>{{ number_format(collect($zakat)->sum('fidyah_beras'), 0, ',', '.') }} KG</th>
+                                            <th>{{ number_format(collect($zakat)->sum('fidyah_lainnya'), 0, ',', '.') }}</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>

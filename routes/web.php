@@ -59,6 +59,7 @@ Route::middleware('auth.custom')->group(function () {
     //export
     Route::get('/export-pemohon', [ZakatController::class, 'export_pemohon'])->name('export.pemohon');
     Route::get('/export-pengeluaran', [ZakatController::class, 'export_pengeluaran'])->name('export.pengeluaran');
+    Route::get('/export-zakat', [ZakatController::class, 'export_zakat'])->name('export.zakat');
 
     //delete all
 });

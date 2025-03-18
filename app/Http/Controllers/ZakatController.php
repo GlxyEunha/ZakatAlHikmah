@@ -8,6 +8,8 @@ use App\Models\Pemohon;
 use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
 use App\Exports\PemohonExport;
+use App\Exports\PengeluaranExport;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ZakatController extends Controller
@@ -32,7 +34,7 @@ class ZakatController extends Controller
             'total_beras_bersih'
         ));
     }
-    
+
     public function index_zakat()
     {
         $zakat = Zakat::all();
@@ -166,17 +168,26 @@ class ZakatController extends Controller
     // Memproses update data pemohon (tanpa mengubah status)
     public function update_pemohon(Request $request, $id)
     {
-        $request->validate([
+        // Validasi input
+        $validated = $request->validate([
             'pemohon' => 'required|string|max:255',
             'alamat' => 'required|string',
         ]);
 
+        // Tentukan status berdasarkan checkbox
+        $status = isset($request->gridCheck) ? 'Diterima' : 'Belum Diterima';
+
+        // Cari data pemohon berdasarkan ID
         $pemohon = Pemohon::findOrFail($id);
+
+        // Update data
         $pemohon->update([
-            'pemohon' => $request->pemohon,
-            'alamat' => $request->alamat,
+            'pemohon' => $validated['pemohon'],
+            'alamat' => $validated['alamat'],
+            'status' => $status,
         ]);
 
+        // Redirect dengan pesan sukses
         return redirect()->route('rekap_pemohon')->with('success', 'Data pemohon berhasil diperbarui!');
     }
 
@@ -275,4 +286,10 @@ class ZakatController extends Controller
     {
         return Excel::download(new PemohonExport, 'daftar_pemohon.xlsx');
     }
+
+    public function export_pengeluaran()
+    {
+        return Excel::download(new PengeluaranExport, 'catatan_pengeluaran.xlsx');
+    }
+
 }

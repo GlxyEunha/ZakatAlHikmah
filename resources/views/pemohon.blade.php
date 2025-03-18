@@ -74,9 +74,9 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Rekap Pemohon</li>
                         </ol>
-                        <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end">                          
                             <form action="{{ route('export.pemohon') }}" class="me-2">
-                                <button type="submit" class="btn btn-success">Export Excel</button>  
+                                <button type="submit" class="btn btn-success" onclick="return confirm('Apakah Anda yakin ingin menghapus semua data?')">Export Excel</button>  
                             </form>
                             <form action="{{ route('form-pemohon') }}">
                                 <button type="submit" class="btn btn-primary">Masukkan Data Pemohon</button>  

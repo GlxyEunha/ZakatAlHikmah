@@ -84,6 +84,15 @@
                             <label for="alamat">ALAMAT</label>
                             <textarea name="alamat" class="form-control">{{ $pemohon->alamat }}</textarea>
                         </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" name="gridCheck" type="checkbox" id="gridCheck" value="Diterima" 
+                                    {{ $pemohon->status == 'Diterima' ? 'checked' : '' }}>
+                                <label class="form-check-label" for="gridCheck">
+                                    Diterima
+                                </label>
+                            </div>
+                        </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </form>

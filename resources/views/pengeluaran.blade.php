@@ -75,6 +75,9 @@
                             <li class="breadcrumb-item active">Rekap Catatan Pengeluaran</li>
                         </ol>
                         <div class="d-flex justify-content-end">
+                            <form action="{{ route('export.pengeluaran') }}" class="me-2">
+                                <button type="submit" class="btn btn-success">Export Excel</button>  
+                            </form>
                             <form action="{{ route('form-pengeluaran') }}">
                                 <button type="submit" class="btn btn-primary">Masukkan Data Pengeluaran</button>  
                             </form>

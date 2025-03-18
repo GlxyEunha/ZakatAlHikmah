@@ -36,11 +36,21 @@ class ZakatController extends Controller
         ));
     }
 
-    public function index_zakat()
+    public function index_zakat(Request $request)
     {
-        $zakat = Zakat::all();
-        return view('zakat', compact('zakat'));
+        $query = trim($request->input('query')); // Menghapus spasi di awal dan akhir
+
+        if (!empty($query)) {
+            // Jika ada query pencarian, filter data berdasarkan nama
+            $zakat = Zakat::where('nama', 'LIKE', "%{$query}%")->get();
+        } else {
+            // Jika query kosong, tampilkan semua data
+            $zakat = Zakat::all();
+        }
+
+        return view('zakat', compact('zakat', 'query'));
     }
+
 
     public function store_zakat(Request $request)
     {
@@ -134,11 +144,25 @@ class ZakatController extends Controller
         return redirect()->route('rekap_zakat')->with('success', 'Data zakat berhasil dihapus!');
     }
 
-
-    public function index_pemohon()
+    public function delete_all_zakat()
     {
-        $pemohon = Pemohon::all();
-        return view('pemohon', compact('pemohon'));
+        Zakat::query()->delete();
+
+        return redirect()->route('rekap_zakat')->with('success', 'Semua data zakat berhasil dihapus!');
+    }
+
+    public function index_pemohon(Request $request)
+    {
+        $query = trim($request->input('query')); // Menghapus spasi di awal dan akhir
+
+        if (!empty($query)) {
+            // Jika ada query pencarian, filter data berdasarkan nama
+            $pemohon = Pemohon::where('pemohon', 'LIKE', "%{$query}%")->get();
+        } else {
+            // Jika query kosong, tampilkan semua data
+            $pemohon = Pemohon::all();
+        }
+        return view('pemohon', compact('pemohon', 'query'));
     }
 
     public function store_pemohon(Request $request)
@@ -201,10 +225,25 @@ class ZakatController extends Controller
         return redirect()->route('rekap_pemohon')->with('success', 'Data pemohon berhasil dihapus!');
     }
 
-    public function index_pengeluaran()
+    public function delete_all_pemohon()
     {
-        $pengeluaran = Pengeluaran::all();
-        return view('pengeluaran', compact('pengeluaran'));
+        Pemohon::query()->delete();
+
+        return redirect()->route('rekap_pemohon')->with('success', 'Semua data pemohon berhasil dihapus!');
+    }
+
+    public function index_pengeluaran(Request $request)
+    {
+        $query = trim($request->input('query')); // Menghapus spasi di awal dan akhir
+
+        if (!empty($query)) {
+            // Jika ada query pencarian, filter data berdasarkan nama
+            $pengeluaran = Pengeluaran::where('nama', 'LIKE', "%{$query}%")->get();
+        } else {
+            // Jika query kosong, tampilkan semua data
+            $pengeluaran = Pengeluaran::all();
+        }
+        return view('pengeluaran', compact('pengeluaran', 'query'));
     }
 
     function bersihkanAngka($nilai) {
@@ -283,6 +322,13 @@ class ZakatController extends Controller
         return redirect()->route('rekap_pengeluaran')->with('success', 'Pengeluaran berhasil dihapus!');
     }
 
+    public function delete_all_pengeluaran()
+    {
+        Pengeluaran::query()->delete();
+
+        return redirect()->route('rekap_pengeluaran')->with('success', 'Semua data pengeluaran berhasil dihapus!');
+    }
+
     public function export_pemohon()
     {
         return Excel::download(new PemohonExport, 'daftar_pemohon.xlsx');
@@ -297,5 +343,4 @@ class ZakatController extends Controller
     {
         return Excel::download(new ZakatExport, 'Zakat.xlsx');
     }
-
 }

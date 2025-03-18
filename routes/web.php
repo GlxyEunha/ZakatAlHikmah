@@ -20,7 +20,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('auth.custom')->group(function () {
+
+    //route dashboard
     Route::get('/dashboard', [ZakatController::class, 'dashboard'])->name('dashboard');
+
 
     //route rekap
     Route::get('/rekap-zakat', [ZakatController::class, 'index_zakat'])->name('rekap_zakat');
@@ -62,4 +65,7 @@ Route::middleware('auth.custom')->group(function () {
     Route::get('/export-zakat', [ZakatController::class, 'export_zakat'])->name('export.zakat');
 
     //delete all
+    Route::post('/pemohon/all', [ZakatController::class, 'delete_all_pemohon'])->name('delete_all_pemohon');
+    Route::post('/pengeluaran/all', [ZakatController::class, 'delete_all_pengeluaran'])->name('delete_all_pengeluaran');
+    Route::post('/zakat/all', [ZakatController::class, 'delete_all_zakat'])->name('delete_all_zakat');
 });

@@ -15,21 +15,20 @@
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <!-- Navbar Brand-->
+            <!-- Navbar Brand -->
             <a class="navbar-brand ps-3" href="index.html">Zakat App</a>
-            <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-            <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
-            <!-- Navbar-->
-            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+
+            <!-- Sidebar Toggle -->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Navbar di sisi kanan -->
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user fa-fw"></i>
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
@@ -46,7 +45,7 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <div class="sb-sidenav-menu-heading">Menu</div>
                             <a class="nav-link" href="{{ route('dashboard') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
@@ -74,14 +73,33 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Rekap Pemohon</li>
                         </ol>
-                        <div class="d-flex justify-content-end">                          
-                            <form action="{{ route('export.pemohon') }}" class="me-2">
-                                <button type="submit" class="btn btn-success">Export Excel</button>  
-                            </form>
-                            <form action="{{ route('form-pemohon') }}">
-                                <button type="submit" class="btn btn-primary">Masukkan Data Pemohon</button>  
-                            </form>
+                        <div class="d-flex justify-content-between mb-3 align-items-center">   
+                            <!-- Tombol Hapus Semua Data di sisi kiri -->
+                            <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#deleteAllModal">
+                                <i class="fas fa-trash"></i> Hapus Semua Data
+                            </button>
+
+                            <!-- Tombol Export Excel, Masukkan Data Pemohon, dan Search di sisi kanan -->
+                            <div class="d-flex gap-2">
+                                <form action="{{ route('export.pemohon') }}" class="d-inline">
+                                    <button type="submit" class="btn btn-success btn-lg">Download Excel</button>  
+                                </form>
+                                <form action="{{ route('form-pemohon') }}" class="d-inline">
+                                    <button type="submit" class="btn btn-primary btn-lg">Masukkan Data Pemohon</button>  
+                                </form>
+
+                                <!-- Search -->
+                                <form class="d-flex">
+                                    <div class="input-group">
+                                        <input class="form-control form-control-lg" type="text" name="query" placeholder="Cari Nama" aria-label="Search" required />
+                                        <button class="btn btn-primary btn-lg" id="btnNavbarSearch" type="submit">
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+
                         <br>
                         <div class="card mb-4">
                             <div class="card-header">
@@ -120,6 +138,28 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Konfirmasi Hapus Semua Data -->
+                    <div class="modal fade" id="deleteAllModal" tabindex="-1" aria-labelledby="deleteAllModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteAllModalLabel">Konfirmasi Penghapusan</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Apakah Anda yakin ingin menghapus semua data pemohon?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                    <form id="deleteAllForm" action="{{ route('delete_all_pemohon') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Hapus Semua</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

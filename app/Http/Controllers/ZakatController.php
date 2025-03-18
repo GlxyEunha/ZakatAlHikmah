@@ -2,14 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pemohon;
-use App\Models\Pengeluaran;
 use App\Models\User;
 use App\Models\Zakat;
+use App\Models\Pemohon;
+use App\Models\Pengeluaran;
 use Illuminate\Http\Request;
+use App\Exports\PemohonExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ZakatController extends Controller
 {
+    public function dashboard()
+    {
+        $total_uang = Zakat::sum('fitrah_uang') + Zakat::sum('maal') + Zakat::sum('infaq') + Zakat::sum('fidyah_uang');
+        $total_beras = Zakat::sum('fitrah_beras') + Zakat::sum('fidyah_beras');
+        $total_pemohon = Pemohon::count();
+        $total_pengeluaran_uang = Pengeluaran::sum('biaya_uang') + Pengeluaran::sum('biaya_lainnya');
+        $total_pengeluaran_beras = Pengeluaran::sum('biaya_beras');
+        $total_uang_bersih = $total_uang - $total_pengeluaran_uang;
+        $total_beras_bersih = $total_beras - $total_pengeluaran_beras;
+
+        return view('dashboard', compact(
+            'total_uang', 
+            'total_beras', 
+            'total_pemohon', 
+            'total_pengeluaran_uang', 
+            'total_pengeluaran_beras', 
+            'total_uang_bersih', 
+            'total_beras_bersih'
+        ));
+    }
+    
     public function index_zakat()
     {
         $zakat = Zakat::all();
@@ -246,5 +269,10 @@ class ZakatController extends Controller
         $pengeluaran->delete();
 
         return redirect()->route('rekap_pengeluaran')->with('success', 'Pengeluaran berhasil dihapus!');
+    }
+
+    public function export_pemohon()
+    {
+        return Excel::download(new PemohonExport, 'daftar_pemohon.xlsx');
     }
 }

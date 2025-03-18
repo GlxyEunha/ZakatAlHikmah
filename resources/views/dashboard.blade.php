@@ -72,85 +72,81 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Dashboard Statistik Zakat</li>
                         </ol>
+
+                        <!-- Baris Pertama -->
                         <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #007bff;">
+                                    <div class="card-body fw-bold text-uppercase">Total Uang Keseluruhan</div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <h4 class="fw-bold">Rp {{ number_format($total_uang, 0, ',', '.') }}</h4>
+                                        <i class="fas fa-wallet fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #ffc107;">
+                                    <div class="card-body fw-bold text-uppercase">Total Beras Keseluruhan</div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <h4 class="fw-bold">{{ $total_beras }} kg</h4>
+                                        <i class="fas fa-weight-hanging fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #28a745;">
+                                    <div class="card-body fw-bold text-uppercase">Total Pemohon</div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <h4 class="fw-bold">{{ $total_pemohon }}</h4>
+                                        <i class="fas fa-users fa-2x"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Baris Kedua -->
                         <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #dc3545;">
+                                    <div class="card-body fw-bold text-uppercase">Total Pengeluaran Uang</div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <h4 class="fw-bold">Rp {{ number_format($total_pengeluaran_uang, 0, ',', '.') }}</h4>
+                                        <i class="fas fa-money-bill-wave fa-2x"></i>
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card text-white mb-4 shadow-sm border-0" style="background-color: #dc3545;">
+                                    <div class="card-body fw-bold text-uppercase">Total Pengeluaran Beras</div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <h4 class="fw-bold">{{ $total_pengeluaran_beras }} kg</h4>
+                                        <i class="fas fa-box-open fa-2x"></i>
                                     </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                DataTable Example
+
+                        <!-- Baris Ketiga -->
+                        <div class="row">
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card text-white mb-4 shadow-lg p-4 border border-light" style="background-color: #17a2b8;">
+                                    <div class="card-body fw-bold text-uppercase">Total Uang Bersih</div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <h3 class="fw-bold">Rp {{ number_format($total_uang_bersih, 0, ',', '.') }}</h3>
+                                        <i class="fas fa-wallet fa-2x"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </thead>
-                                
-                                </table>
+                            <div class="col-xl-6 col-md-6">
+                                <div class="card text-white mb-4 shadow-lg p-4 border border-light" style="background-color: #17a2b8;">
+                                    <div class="card-body fw-bold text-uppercase">Total Beras Bersih</div>
+                                    <div class="card-footer d-flex justify-content-between align-items-center">
+                                        <h3 class="fw-bold">{{ $total_beras_bersih }} kg</h3>
+                                        <i class="fas fa-weight-hanging fa-2x"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

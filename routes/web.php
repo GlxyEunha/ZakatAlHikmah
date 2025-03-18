@@ -63,6 +63,7 @@ Route::middleware('auth.custom')->group(function () {
     Route::get('/export-pemohon', [ZakatController::class, 'export_pemohon'])->name('export.pemohon');
     Route::get('/export-pengeluaran', [ZakatController::class, 'export_pengeluaran'])->name('export.pengeluaran');
     Route::get('/export-zakat', [ZakatController::class, 'export_zakat'])->name('export.zakat');
+    Route::get('/export-dashboard', [ZakatController::class, 'export_dashboard'])->name('export.dashboard');
 
     //delete all
     Route::post('/pemohon/all', [ZakatController::class, 'delete_all_pemohon'])->name('delete_all_pemohon');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DashboardExport;
 use App\Models\User;
 use App\Models\Zakat;
 use App\Models\Pemohon;
@@ -342,5 +343,10 @@ class ZakatController extends Controller
     public function export_zakat()
     {
         return Excel::download(new ZakatExport, 'Zakat.xlsx');
+    }
+
+    public function export_dashboard()
+    {
+        return Excel::download(new DashboardExport, 'Dashboard.xlsx');
     }
 }

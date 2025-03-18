@@ -74,6 +74,13 @@
                             <li class="breadcrumb-item active">Dashboard Statistik Zakat</li>
                         </ol>
 
+                        <div>
+                            <form action="{{ route('export.dashboard') }}" class="d-inline">
+                                <button type="submit" class="btn btn-success btn-lg">Download Excel</button>  
+                            </form>
+                        </div>
+                        <br>
+
                         <!-- Baris Pertama -->
                         <div class="row">
                             <div class="col-xl-4 col-md-6">
